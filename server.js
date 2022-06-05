@@ -4,12 +4,12 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import userRouter from "./Server/routes/userRouter.js";
-import facilityRouter from "./Server/routes/facilityRouter.js";
-import certificateRouter from "./Server/routes/certificateRouter.js";
-import inspectActivityRouter from "./Server/routes/inspectActivityRouter.js";
-import inspectionUnitRouter from "./Server/routes/inspectionUnitRouter.js";
-import sampleRouter from "./Server/routes/sampleRouter.js";
+import userRouter from "./routes/userRouter.js";
+import facilityRouter from "./routes/facilityRouter.js";
+import certificateRouter from "./routes/certificateRouter.js";
+import inspectActivityRouter from "./routes/inspectActivityRouter.js";
+import inspectionUnitRouter from "./routes/inspectionUnitRouter.js";
+import sampleRouter from "./routes/sampleRouter.js";
 
 const app = express();
 app.use(cors());
@@ -26,7 +26,6 @@ app.use("/sample", sampleRouter);
 
 dotenv.config();
 const URI = process.env.MONGODB_URI;
-console.log(URI);
 mongoose.connect(URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true

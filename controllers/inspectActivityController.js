@@ -39,12 +39,18 @@ export async function addNewInspectActivity(req, res) {
     })
 }
 
-// Hiển thị list hoạt động thanh tra. Ưu tiên hiển thị đợt thanh tra trong tương lai gần.
+// Lấy danh sách hoạt động thanh tra. Ưu tiên hiển thị đợt thanh tra trong tương lai gần.
+// Chia hoạt động thanh tra thành ba loại: Đã thanh tra và có kết quả, đang thanh tra, chưa thanh tra.
+export async function getListInspectActivity(req, res) {
+    const activities = await InspectActivity.find({});
+    
+}
 
 // Giám sát hoạt động: Cho phép chuyên viên cập nhật trạng thái liên tục.
 
 // Thống kê kết quả thực hiện thanh kiểm tra.
 
 // Tự động gợi ý những cơ sở cần thanh, kiểm tra tiếp theo.
+// Dựa vào hoạt động thanh kiểm tra (ngày bắt đầu càng gần với ngày hiện tại thì độ ưu tiên càng lớn).
 
 // Filter hoạt động theo trạng thái. Cho phép tìm kiếm theo tên cơ sở.

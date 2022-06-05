@@ -170,7 +170,7 @@ export async function makeStatistical(req, res) {
         })
     })
 
-    // Lấy danh sách giấy chứng nhận của các cơ sở thuộc typeOfBusiness và thuộc quyền quản lý của user.
+    // Lấy danh sách giấy chứng nhận tương ứng với cơ sở thuộc loại hình typeOfBusiness và thuộc quyền quản lý của user.
     let certificates = [];
     await Certificate.find({})
     .then((result) => {
@@ -227,6 +227,7 @@ export async function makeStatistical(req, res) {
 
 // Phần client xuất giấy chứng nhận ra PDF.
 
+// Hàm này để fix lại thông tin lúc thêm giấy chứng nhận một cách thủ công.
 export async function updateFacility(req, res) {
     let certificates = await Certificate.find({});
     for (let i = 0; i < certificates.length; i++) {
