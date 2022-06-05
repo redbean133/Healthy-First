@@ -1,6 +1,8 @@
 import Certificate from "../models/certificateModel.js";
 import Facility from "../models/facilityModel.js";
 import { getToday } from "../utils/dateFeatures.js";
+import { filterByExpertArea } from "../utils/filter.js";
+import { filterFacilityByUserAreas } from "./facilityController.js";
 import moment from "moment";
 
 // Cấp mới giấy chứng nhận.
@@ -59,7 +61,7 @@ export async function extend(req, res) {
         });
     }
 
-    Certificate.updateOne({ _id: _id }, { expireOn: newExpire }).exec()
+    Certificate.updateOne({ _id: _id }, { expireOn: newExpire, state: "valid" }).exec()
     .then(() => {
         res.status(200).json({ message: "Gia hạn thành công." });
     })
@@ -74,7 +76,7 @@ export async function extend(req, res) {
 // Thu hồi giấy chứng nhận.
 export async function revoke(req, res) {
     const _id = req.params.id;
-    Certificate.updateOne({ _id: _id }, { expireOn: getToday(), status: "revoked" }).exec()
+    Certificate.updateOne({ _id: _id }, { expireOn: getToday(), state: "revoked" }).exec()
     .then((result) => {
         if (result.modifiedCount == 0) {
             return res.status(400).json({ message: "Không tìm thấy giấy chứng nhận." });
@@ -103,26 +105,11 @@ export async function getCertificateList(req, res) {
         .sort({ _id: -1 })
         .exec()
         .then(async (certificates) => {
-            if (user.role == "manager") {
-                return res.status(200).json({
-                    message: `Truy xuất thành công ${ certificates.length } đối tượng.`,
-                    certificates: certificates
-                })
-            } else {
-                let result = [];
-                for (let i = 0; i < certificates.length; i++) {
-                    let certificate = certificates[i];
-                    let facilityID = certificate.facilityID;
-                    let facility = await Facility.findById(facilityID);
-                    if (user.areas.includes(facility.address.district)) {
-                        result.push(certificate);
-                    }
-                }
-                return res.status(200).json({
-                    message: `Truy xuất thành công ${ result.length } đối tượng.`,
-                    certificates: result
-                })
-            }
+            let result = await filterByExpertArea(user, certificates);
+            return res.status(200).json({
+                message: `Truy xuất thành công ${ result.length } đối tượng.`,
+                certificates: result
+            })
         })
         .catch((error) => {
             res.status(500).json({
@@ -151,16 +138,10 @@ export async function makeStatistical(req, res) {
     // Lấy danh sách _id cơ sở thuộc loại hình typeOfBusiness và thuộc quyền quản lý của user.
     let facilityList = [];
     await facilityQuery.exec()
-    .then(async (facilities) => {
+    .then((facilities) => {
+        facilities = filterFacilityByUserAreas(user, facilities);
         for (let i = 0; i < facilities.length; i++) {
-            let facility = facilities[i];
-            if (user.role == "manager") {
-                facilityList.push(facility._id)
-            } else {
-                if (user.areas.includes(facility.address.district)) {
-                    facilityList.push(facility._id);
-                }
-            }
+            facilityList.push(facilities[i]._id);
         }
     })
     .catch((error) => {

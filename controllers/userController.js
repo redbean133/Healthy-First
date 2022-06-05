@@ -180,7 +180,8 @@ export async function changeInformation(req, res) {
     }
 
     // Update thông tin tài khoản.
-    User.updateOne({ _id: req.user._id }, req.body).exec()
+    User.updateOne({ _id: req.user._id }, req.body)
+    .exec()
     .then(() => {
         return res.status(200).json({ message: "Update user information successfully." });
     })

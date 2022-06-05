@@ -162,7 +162,7 @@ export async function filterByCertificateState(req, res) {
 }
 
 // Function lọc các cơ sở tương ứng với khu vực quản lý của chuyên viên.
-function filterFacilityByUserAreas(user, originFacility) {
+export function filterFacilityByUserAreas(user, originFacility) {
     if (user.role == "manager") {
         return originFacility;
     } else {
@@ -234,7 +234,7 @@ export async function deleteFacility(req, res) {
 
 // Hàm này dùng để check quyền hạn của User hiện tại đối với một cơ sở nào đó.
 // Trả về True tương ứng với có quyền hạn, False tương ứng với không có quyền hạn.
-async function checkPermission(user, facilityID) {
+export async function checkPermission(user, facilityID) {
     const facility = await Facility.findById(facilityID);
     if (!(user.role == "manager" || user.areas.includes(facility.address.district))) {
         return false;

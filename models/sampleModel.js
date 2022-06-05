@@ -6,7 +6,15 @@ const sampleSchema = new Schema({
         type: String,
         required: true
     },
+    name: {
+        type: String,
+        required: true
+    },
     inspectionUnitID: {
+        type: String,
+        required: true
+    },
+    facilityID: {
         type: String,
         required: true
     },
@@ -19,13 +27,13 @@ const sampleSchema = new Schema({
     },
     // 0: Không đạt tiêu chuẩn an toàn thực phẩm.
     // 1: Đạt tiêu chuẩn an toàn thực phẩm.
+    // -1: Chưa có kết quả.
     inspectionResult: {
-        type: String,
-        default: null
+        type: Number,
+        default: -1
     },
     receiveResultOn: {
-        type: String,
-        default: null
+        type: String
     }
 });
 

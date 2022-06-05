@@ -24,6 +24,7 @@ const inspectActivitySchema = new Schema({
         default: []
     },
     // Cập nhật giai đoạn của đợt thanh tra:
+    // -1: Đã đến ngày thanh tra nhưng chuyên viên chưa tiến hành.
     // 0: Chưa tới ngày thanh tra.
     // 1: Giai đoạn khảo sát tại cơ sở.
     // 2: Giai đoạn xét nghiệm mẫu thức ăn (nếu cần).
@@ -34,13 +35,16 @@ const inspectActivitySchema = new Schema({
         default: 0
     },
     // Kết quả của lần thanh tra:
+    // -1 tương ứng với chưa có kết quả
     // 0 tương ứng với cơ sở không đạt tiêu chuẩn an toàn thực phẩm.
     // 1 tương ứng với cơ sở đạt tiêu chuẩn an toàn thực phẩm.
     result: {
-        type: Number
+        type: Number,
+        default: -1
     },
     minutes: {
-        type: Object
+        type: Object,
+        default: null
     }
 })
 
