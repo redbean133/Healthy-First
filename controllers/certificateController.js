@@ -91,6 +91,24 @@ export async function revoke(req, res) {
     })
 }
 
+export async function getDetail(req, res) {
+    const _id = req.params.id;
+    Certificate.findById(_id)
+    .exec()
+    .then((certificate) => {
+        return res.status(200).json({
+            message: "Truy cập thông tin thành công.",
+            certificate: certificate
+        })
+    })
+    .catch((error) => {
+        return res.status(500).json({
+            message: "Hệ thống gặp sự cố.",
+            error: error.message
+        })
+    });
+}
+
 // Lấy danh sách giấy chứng nhận.
 // Chỉ lấy danh sách các giấy chứng nhận cấp cho cơ sở thuộc khu vực quản lý của chuyên viên.
 // Lấy toàn bộ danh sách giấy chứng nhận nếu người dùng là manager.
