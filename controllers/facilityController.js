@@ -254,9 +254,13 @@ export async function deleteFacility(req, res) {
 // Trả về True tương ứng với có quyền hạn, False tương ứng với không có quyền hạn.
 export async function checkPermission(user, facilityID) {
     const facility = await Facility.findById(facilityID);
-    if (!(user.role == "manager" || user.areas.includes(facility.address.district))) {
-        return false;
+    if (facility) {
+        if (!(user.role == "manager" || user.areas.includes(facility.address.district))) {
+            return false;
+        } else {
+            return true;
+        }
     } else {
-        return true;
+        return false;
     }
 }

@@ -109,6 +109,24 @@ export async function getListInspectActivity(req, res) {
     })
 }
 
+export async function getDetailInformation(req, res) {
+    const _id = req.params.id;
+    InspectActivity.findById(_id)
+    .exec()
+    .then((inspectActivity) => {
+        return res.status(200).json({
+            message: "Truy cập thông tin thành công.",
+            inspectActivity: inspectActivity
+        })
+    })
+    .catch((error) => {
+        return res.status(500).json({
+            message: "Hệ thống gặp sự cố.",
+            error: error.message
+        })
+    });
+}
+
 // Giám sát hoạt động: Cho phép chuyên viên cập nhật trạng thái của đợt thanh tra.
 // URL: http://localhost:5000/inspect-activity/id
 // Set có thể là state | samples | result | minutes.

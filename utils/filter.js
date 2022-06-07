@@ -9,11 +9,13 @@ export async function filterByExpertArea(user, array) {
         let result = [];
         for (let i = 0; i < array.length; i++) {
             let object = array[i];
-            let facilityID = object.facilityID;
-            let facility = await Facility.findById(facilityID);
-            if (user.areas.includes(facility.address.district)) {
-                result.push(object);
-            }
+            if (object.facilityID) {
+                let facilityID = object.facilityID;
+                let facility = await Facility.findById(facilityID);
+                if (user.areas.includes(facility.address.district)) {
+                    result.push(object);
+                }
+            }   
         }
         return result;
     }

@@ -286,36 +286,20 @@ export async function getUserList(req, res) {
         })
 }
 
-
-// Fake dữ liệu
-import { faker } from "@faker-js/faker";
-export async function fakeData(req, res) {
-    for (let i = 0; i <= 200; i++) {
-        let name = faker.name.findName();
-        let email = faker.internet.email();
-        let password = "Domanhcuong133";
-        let retypePassword = "Domanhcuong133";
-        let phoneNumber = faker.phone.phoneNumber();
-        let gender;
-        if (i % 2 == 0) {
-            gender = "Nam";
-        } else {
-            gender = "Nữ";
-        }
-        let dateOfBirth = "2001-03-13";
-        let identityCardNumber = faker.random.numeric(12);
-        let newUser = new User({
-            _id: mongoose.Types.ObjectId(),
-            name, 
-            email, 
-            password, 
-            retypePassword, 
-            phoneNumber, 
-            gender, 
-            dateOfBirth, 
-            identityCardNumber
-        });
-        await newUser.save();
-    }
-    res.json({message: "Done."});
+export async function getUserInforByID(req, res) {
+    const _id = req.params.id;
+    User.findById(_id)
+    .exec()
+    .then((user) => {
+        res.status(200).json({
+            message: `Truy vấn thành công.`,
+            user: user
+        })
+    })
+    .catch((error) => {
+        res.status(500).json({
+            message: "Lỗi hệ thống.",
+            error: error.message
+        })
+    })
 }

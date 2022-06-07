@@ -3,6 +3,7 @@ import Facility from "../models/facilityModel.js";
 import { getToday } from "../utils/dateFeatures.js";
 import { filterByExpertArea } from "../utils/filter.js";
 import { filterFacilityByUserAreas } from "./facilityController.js";
+import { checkPermission } from "./facilityController.js";
 import moment from "moment";
 
 // Cấp mới giấy chứng nhận.
@@ -28,6 +29,13 @@ export async function addCertificate(req, res) {
         } else {
             state = "valid";
         }
+    }
+
+    const canAdd = await checkPermission(req.user, facilityID);
+    if (!canAdd) {
+        return res.status(400).json({
+            message: "Không có quyền hạn cấp giấy chứng nhận cho cơ sở này.",
+        });
     }
 
     const newCertificate = new Certificate({ _id, createOn, expireOn, facilityID, expertID, state });
@@ -225,13 +233,3 @@ export async function makeStatistical(req, res) {
 // Phần client xuất pdf bản quyết định thu hồi giấy chứng nhận.
 
 // Phần client xuất giấy chứng nhận ra PDF.
-
-// Hàm này để fix lại thông tin lúc thêm giấy chứng nhận một cách thủ công.
-export async function updateFacility(req, res) {
-    let certificates = await Certificate.find({});
-    for (let i = 0; i < certificates.length; i++) {
-        let certificate = certificates[i];
-        await Facility.updateOne({ _id: certificate.facilityID }, { certificateID: certificate._id });
-    }
-    return res.json({msg: "OK"});
-}
