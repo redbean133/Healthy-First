@@ -49,6 +49,24 @@ export async function addNewFacility(req, res) {
     });
 }
 
+export async function getDetailInformation(req, res) {
+    const _id = req.params.id;
+    Facility.findById(_id)
+    .exec()
+    .then((facility) => {
+        return res.status(200).json({
+            message: "Truy cập thông tin thành công.",
+            facility: facility
+        })
+    })
+    .catch((error) => {
+        return res.status(500).json({
+            message: "Hệ thống gặp sự cố.",
+            error: error.message
+        })
+    });
+}
+
 // Lấy toàn bộ cơ sở [có phân trang] theo khu vực quản lý của user.
 // Tra cứu thông tin của cơ sở theo tên, filter theo địa chỉ.
 // URL: http://localhost:5000/facility?page=1&name=Cơ+sở&city=Hà+Nội&district=Mê+Linh&subDistrict=Tam+Đồng
@@ -152,7 +170,7 @@ export async function filterByCertificateState(req, res) {
             }
         }
     }
-    res.status(400).json({
+    res.status(200).json({
         valid: valid,
         invalid: invalid,
         notHave: notHave,
@@ -242,5 +260,3 @@ export async function checkPermission(user, facilityID) {
         return true;
     }
 }
-
-// Xem toàn bộ biên bản vi phạm của cơ sở.
