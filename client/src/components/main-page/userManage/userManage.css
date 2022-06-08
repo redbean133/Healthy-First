@@ -1,0 +1,14 @@
+#user-container h3 {
+    margin: 100px auto 60px;
+}
+
+#set-user-area {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+#set-user-area .section-title {
+    margin-bottom: 40px;
+    margin-left: 20px;
+}

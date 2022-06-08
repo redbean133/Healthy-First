@@ -44,7 +44,11 @@ const inspectActivitySchema = new Schema({
     },
     minutes: {
         type: Object,
-        default: null
+        default: {
+            level: "",
+            penalty: "",
+            description: ""
+        }
     }
 })
 

@@ -1,0 +1,105 @@
+.login-container {
+    padding-top: 80px;
+    background: url("../../../../public/assets/img/background-login.png") no-repeat bottom center / cover ;
+    padding-bottom: 82px;
+}
+
+.login-page {
+    width: 420px;
+    height: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    background-color: white;
+}
+
+.login-page img {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: -15px;
+}
+
+.login-page .login-box {
+    width: 100%;
+    height: 330px;
+    padding: 40px 40px 50px 40px;
+}
+
+.login-box h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+}
+
+.login-page input {
+    width: 100%;
+    margin-top: 24px;
+    padding-left: 6px;
+    height: 40px;
+    color: #353030;
+    border: 1px solid #57CC99;
+    border-radius: 4px;
+    outline: none;
+}
+
+.login-page button {
+    height: 44px;
+    width: 100%;
+    background-color: #57CC99;
+    color: white;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    border-radius: 22px;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.login-page button:hover {
+    opacity: 0.8;
+}
+
+.login-page .sign-up {
+    text-align: center;
+    font-size: 13px;
+}
+
+.login-box a {
+    text-decoration: none;
+    color: #57CC99;
+}
+
+.register-page {
+    width: 840px;
+    height: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    background-color: white;
+}
+
+.register-page .register-box {
+    padding: 40px 0px 50px 40px;
+}
+
+.register-page input {
+    width: 44%;
+    margin-top: 24px;
+    margin-right: 40px;
+    display: inline;
+}
+
+.register-page .radio {
+    width: 5% !important;
+    height: 16px;
+    margin-right: 10px;
+}
+
+.register-page button {
+    width: 93%;
+    align: center;
+}

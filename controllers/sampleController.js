@@ -1,6 +1,7 @@
 import Sample from "../models/sampleModel.js";
 import InspectionUnit from "../models/inspectionUnitModel.js";
 import { checkPermission } from "./facilityController.js";
+import { filterByExpertArea } from "../utils/filter.js";
 
 // Thêm mẫu thực phẩm mới.
 export async function addNewSample(req, res) {
@@ -50,6 +51,29 @@ export async function addNewSample(req, res) {
             error: error.message
         })
     })
+}
+
+export async function getList(req, res) {
+    const user = req.user;
+    const perPage = 30;
+    let page = req.query.page || 1;
+    let query = Sample.find({});
+    query.skip((page - 1) * perPage)
+        .limit(perPage)
+        .exec()
+        .then(async (samples) => {
+            let result = await filterByExpertArea(user, samples);
+            return res.status(200).json({
+                message: `Truy xuất thành công ${ result.length } đối tượng.`,
+                samples: result
+            })
+        })
+        .catch((error) => {
+            res.status(500).json({
+                message: "Hệ thống gặp sự cố.",
+                error: error.message
+            })
+        })
 }
 
 // Chỉnh sửa (cập nhật trạng thái và kết quả).

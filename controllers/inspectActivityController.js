@@ -137,8 +137,7 @@ export async function updateActivity(req, res) {
     if (!canUpdate) {
         return res.status(403).json({ message: "Không có quyền hạn." });
     }
-    const { changeProperty, value } = req.body;
-    InspectActivity.updateOne({ _id: _id }, { [changeProperty]: value })
+    InspectActivity.updateOne({ _id: _id }, { ...req.body })
     .exec()
     .then(() => {
         return res.status(200).json({ message: "Cập nhật thành công." });
@@ -207,4 +206,21 @@ export async function makeStatistical(req, res) {
         achived: achived,
         nonAchived: nonAchived
     })
+}
+
+export async function deleteActivity(req, res) {
+    const _id = req.params.id;
+    const activity = await InspectActivity.findById(_id);
+    const canUpdate = await checkPermission(req.user, activity.facilityID);
+    if (!canUpdate) {
+        return res.status(403).json({ message: "Không có quyền hạn." });
+    }
+    InspectActivity.deleteOne({ _id: _id })
+    .exec()
+    .then(() => {
+        return res.status(200).json({ message: "Xoá thành công." });
+    })
+    .catch((error) => {
+        return res.status(500).json({ message: error.message });
+    });
 }

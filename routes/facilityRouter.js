@@ -9,6 +9,6 @@ router.get("/", authentication, getFacilityList);
 router.get("/:id", authentication, getDetailInformation);
 router.put("/:id", authentication, changeInformation);
 router.delete("/:id", authentication, deleteFacility);
-router.get("/filter-by-certificate", authentication, filterByCertificateState);
+router.get("/filter/filter-by-certificate", authentication, filterByCertificateState);
 
 export default router;

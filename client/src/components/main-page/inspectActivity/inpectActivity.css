@@ -1,0 +1,27 @@
+.inspect-container h3 {
+    margin: 100px auto 40px auto !important;
+}
+
+.inspect-container .title {
+    margin: 20px auto 20px auto !important;
+}
+
+.statistic-box input,select {
+    margin: 4px 0 0 0 !important;
+}
+
+#create-activity {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+#create-activity .section-title {
+    margin-bottom: 40px;
+    margin-left: 0px;
+}
+
+#create-activity .web-button {
+    margin-top: 15px;
+    margin-left: 0px;
+}

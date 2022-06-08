@@ -1,0 +1,47 @@
+#main {
+    overflow: hidden;
+}
+  
+#header {
+    height: 46.4px;
+    background-color: black;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#navigation {
+    display: block;
+}
+
+#navigation > li {
+    display: block;
+    float: left;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#navigation .login-logout {
+    float: right;
+}
+
+#navigation li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    line-height: 46.4px;
+    padding: 0px 24px !important;
+    text-transform: uppercase;
+}
+
+#navigation li:hover > a {
+    background-color: #ccc;
+    color: black !important;
+}
+
+#navigation .login-logout:hover > a {
+    background-color: rgb(244, 67 , 54);
+    color: white !important;
+}

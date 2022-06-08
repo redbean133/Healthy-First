@@ -1,0 +1,37 @@
+.extend-certificate-input {
+    height: 32px;
+    width: 128px;
+}
+
+.certificate-container h3 {
+    margin-top: 100px;
+}
+
+.statistic-box {
+    width: 100%;
+}
+
+.input-box {
+    width: 100%;
+    display: flex;
+    margin-left: -30px;
+    align-items: flex-end;
+}
+
+.input-box .column {
+    flex: 1;
+}
+
+.input-box button {
+    margin: 0px !important;
+}
+
+#create-certificate {
+    display: flex;
+    flex-direction: column;
+}
+
+#create-certificate .section-title {
+    margin-bottom: 40px;
+    margin-left: 30px;
+}

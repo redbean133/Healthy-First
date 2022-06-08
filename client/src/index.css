@@ -1,0 +1,81 @@
+/* Reset CSS */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Common */
+.clear {
+  clear: both;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, input, select, button {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  /* Toc do chuyen trang thai cua button */
+  transition-duration: 0.1s;
+}
+
+#main-page {
+  width: 90%;
+  margin: 0px auto;
+}
+
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.column {
+  float: left !important;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.three-column {
+  width: 33.3333%;
+}
+
+.two-column {
+  width: 50%;
+}
+
+.one-column {
+  width: 100%;
+}
+
+.four-column {
+  width: 22%;
+}
+
+.web-button {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 16px;
+  width: 108px;
+  height: 40px;
+  border: none;
+  border-radius: 3px;
+}
+
+.web-button:hover {
+  background-color: #ccc;
+  color: #000;
+}
+
+@import url("./components/main-page/authentication/authentication.css");
+@import url("./components/header/Header.css");
+@import url("./components/main-page/facility/facility.css");
+@import url("./components/main-page/certificate/certificate.css");
+@import url("./components/main-page/inspectActivity/inpectActivity.css");
+@import url("./components/main-page/userManage/userManage.css");
